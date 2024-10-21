@@ -4,7 +4,7 @@
 @nickname: Ardenius
 @description: ARD Dual Prompt can be used for positive and negative prompts converts string text input to conditioning prompt.
 """
-#  this software and code © 2024 initals AMA nickname Ardenius is licensed under GPL V3.0
+#  this software and code © 2024 initals AMAA nickname Ardenius is licensed under GPL V3.0
 #  ( author contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
 #  ➡️ follow me at https://ko-fi.com/ardenius on the top right corner (follow)
 #  📸 Change the mood ! by Visiting my AI Image Gallery
