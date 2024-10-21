@@ -4,13 +4,15 @@
 @nickname: Ardenius
 @description: ARD control box is designed to gather workflow variables into 1 node.
 """
-#  this software and code © 2024 initals AMAA nickname Ardenius is licensed under GPL V3.0
-#  ( author contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
-#  ➡️ follow me at https://ko-fi.com/ardenius on the top right corner (follow)
+#  licensed under General Public License v3.0 all rights reserved © 2024
+#  ( author initials AMAA Nickname Ardenius contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
+#  ➡️ follow me at https://ko-fi.com/ardenius in the top right corner (follow)
 #  📸 Change the mood ! by Visiting my AI Image Gallery
-#  🏆 Premium Memebers only Perks (Premium SD Models, ComfyUI custom nodees, and more to come)
-#  the below code is in part or in full based upon ComfyUI code licensed under General Public License v3.0 https://www.gnu.org/licenses/gpl-3.0.txt by
+#  🏆 Support me by getting Premium Members only Perks (Premium SD Models, ComfyUI custom nodes, and more to come)
+#  below code is based upon ComfyUI code licensed under General Public License v3.0 https://www.gnu.org/licenses/gpl-3.0.txt by
 #  contributers found here https://github.com/comfyanonymous/ComfyUI
+#  thus all code here is released to the user as per the GPL V3.0 terms.
+
 
 import os.path
 import folder_paths
@@ -59,7 +61,7 @@ class ARD_CONTROL_BOX:
 
     CATEGORY = "Ardenius"
     DESCRIPTION = "ARD control box is designed to gather workflow variables into 1 node"
-    # my_code_start
+
     def ard_control_box(self, cfg, steps, denoise, scaler, seed, positive_prompt, negative_prompt, model, vae, width, height, latent_width, latent_height, latent_batch_size):
 
         remainder = width % 8
@@ -81,4 +83,4 @@ class ARD_CONTROL_BOX:
     def generate_latent(self, width, height, latent_batch_size=1):
         latent = torch.zeros([latent_batch_size, 4, height // 8, width // 8], device=self.device)
         return {"samples":latent}
-    # my_code_end
+
