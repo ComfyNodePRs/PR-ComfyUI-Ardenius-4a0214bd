@@ -1,5 +1,5 @@
 """
-@author: initials AMA
+@author: initials AMAA
 @title: Ardenius
 @nickname: Ardenius
 @description: CPlus control box is designed to gather workflow variables into 1 node for easier control of your workflow.
