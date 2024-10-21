@@ -12,7 +12,11 @@ my favorite node :) read below for details.
 combines negative and positive in 1 node
 3. ARD Text Box:
 text box that outputs a text string
-
+4. ARD math node : takes 2 float inputs and does math operations on them and outputs either integer or float 
+5. ARD integer: allows adding an integer variable 
+6. ARD float: allows adding a float variable 
+7. ARD integer to float : converts an integer to float
+   
 (Will be adding new free nodes to this package so make sure to follow me on this ko-fi page in the top right for future releases )
 
 the ARD control box gets a model and prompts input and outputs:
