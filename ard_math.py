@@ -1,8 +1,8 @@
 """
-@author: initials AMA
+@author: initials AMAA
 @title: Ardenius
 @nickname: Ardenius
-@description: ARD Integer variable
+@description: ARD Math node takes 2 float inputs and outputs integer or float. if you need integer as input use ARD integer to float node.
 """
 #  licensed under General Public License v3.0 all rights reserved © 2024
 #  ( author initials AMAA Nickname Ardenius contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )

@@ -1,5 +1,5 @@
 """
-@author: initials AMA
+@author: initials AMAA
 @title: Ardenius
 @nickname: Ardenius
 @description: ARD text box outputs a string of text

@@ -1,5 +1,5 @@
 """
-@author: initials AMA
+@author: initials AMAA
 @title: Ardenius
 @nickname: Ardenius
 @description: ARD Dual Prompt can be used for positive and negative prompts converts string text input to conditioning prompt.

@@ -1,8 +1,8 @@
 """
-@author: initials AMA
+@author: initials AMAA
 @title: Ardenius
 @nickname: Ardenius
-@description: ARD integer: outputs an integer number
+@description: ARD integer to float: takes an integer and outputs a float to go into the ARD math node
 """
 #  licensed under General Public License v3.0 all rights reserved © 2024
 #  ( author initials AMAA Nickname Ardenius contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
