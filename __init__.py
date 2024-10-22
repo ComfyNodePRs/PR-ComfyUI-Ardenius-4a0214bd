@@ -1,9 +1,3 @@
-"""
-@author: initials AMAA
-@title: Ardenius
-@nickname: Ardenius
-@description: ARD ComfyUI Ardenius nodes include ARD Control Box, ARD Math nodes and other nodes.
-"""
 #  licensed under General Public License v3.0 all rights reserved © 2024
 #  ( author initials AMAA Nickname Ardenius contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
 #  ➡️ follow me at https://ko-fi.com/ardenius in the top right corner (follow)
