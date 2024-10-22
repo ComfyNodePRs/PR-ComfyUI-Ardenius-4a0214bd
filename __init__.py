@@ -2,7 +2,7 @@
 @author: initials AMAA
 @title: Ardenius
 @nickname: Ardenius
-@description: CPlus control box is designed to gather workflow variables into 1 node for easier control of your workflow.
+@description: ARD ComfyUI Ardenius nodes include ARD Control Box, ARD Math nodes and other nodes.
 """
 #  licensed under General Public License v3.0 all rights reserved © 2024
 #  ( author initials AMAA Nickname Ardenius contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
