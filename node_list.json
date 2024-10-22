@@ -1,0 +1,9 @@
+{
+  "ARD Control Box": "control node that allows inputing model, vae, prompts, allows you to change things like steps, cfg, latent width, height, and outputs many parameters to be used in your workflow",
+  "ARD Dual Prompt": "inputs positive and negative prompts as string text and outputs positive and negative conditioning prompts",
+  "ard_float": "float variable node",
+  "ard_integer": "integer variable node",
+  "ard_integer_to_float": "converts integer to float to be used in ARD math node",
+  "ard_math": "simple math operations multiply divide add subtract on two input float variables and outputs integer and float outputs",
+  "ard_text_box": "inputs text string and outputs text string"
+}
