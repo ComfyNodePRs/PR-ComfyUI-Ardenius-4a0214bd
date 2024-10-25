@@ -2,7 +2,7 @@
 #  ( author initials AMAA Nickname Ardenius contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
 #  ➡️ follow me at https://ko-fi.com/ardenius in the top right corner (follow)
 #  📸 Change the mood ! by Visiting my AI Image Gallery
-#  🏆 Support me by getting Premium Members only Perks (Premium SD Models, ComfyUI custom nodes, and more to come)
+#  🏆 Support me by getting Premium Members only Perks (Premium Ardeniusai.com prompt engineer, text to image Models, ComfyUI custom nodes, and more to come)
 #  below code is based upon ComfyUI code licensed under General Public License v3.0 https://www.gnu.org/licenses/gpl-3.0.txt by
 #  contributers found here https://github.com/comfyanonymous/ComfyUI
 #  thus all code here is released to the user as per the GPL V3.0 terms.
@@ -12,6 +12,7 @@ import sys
 import json
 import inspect
 import importlib.util
+import hashlib
 
 
 def save_dict_to_json(data_dict, json_file_path):
@@ -31,6 +32,20 @@ def read_dict_from_json(json_file_path):
     else:
         data_dict = {}
     return data_dict
+
+
+def sha256_hash_file(filename):
+    # Create a SHA-256 hash object
+    sha256_hash = hashlib.sha256()
+
+    # Open the file in binary mode and read chunks to avoid loading the entire file into memory
+    with open(filename, "rb") as f:
+        # Read the file in small chunks
+        for byte_block in iter(lambda: f.read(4096), b""):
+            sha256_hash.update(byte_block)
+
+    # Return the hexadecimal digest of the hash
+    return sha256_hash.hexdigest()
 
 
 def is_utf8(text):
@@ -64,4 +79,3 @@ def scan_nodes_folder(nodes_path):
                 file_list.append([module_name, obj])
 
             return file_list
-

@@ -1,6 +1,6 @@
 """
 @author: initials AMAA
-@title: Ardenius
+@title: Ardenius AI
 @nickname: Ardenius
 @description: ARD Dual Prompt can be used for positive and negative prompts converts string text input to conditioning prompt.
 """
@@ -8,7 +8,7 @@
 #  ( author initials AMAA Nickname Ardenius contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
 #  ➡️ follow me at https://ko-fi.com/ardenius in the top right corner (follow)
 #  📸 Change the mood ! by Visiting my AI Image Gallery
-#  🏆 Support me by getting Premium Members only Perks (Premium SD Models, ComfyUI custom nodes, and more to come)
+#  🏆 Support me by getting Premium Members only Perks (Premium Ardeniusai.com prompt engineer, text to image Models, ComfyUI custom nodes, and more to come)
 #  below code is based upon ComfyUI code licensed under General Public License v3.0 https://www.gnu.org/licenses/gpl-3.0.txt by
 #  contributers found here https://github.com/comfyanonymous/ComfyUI
 #  thus all code here is released to the user as per the GPL V3.0 terms.
@@ -24,8 +24,7 @@ class ARD_DUAL_PROMPT:
                 "clip": ("CLIP", {"tooltip": "The CLIP model used for encoding the text."})
             },
             "optional": {
-                "neg_text": (
-                "STRING", {"multiline": True, "dynamicPrompts": True, "tooltip": "The text to be encoded."}),
+                "neg_text": ("STRING", {"dynamicPrompts": True, "tooltip": "The text to be encoded."}),
             }
         }
 
@@ -64,11 +63,11 @@ class ARD_DUAL_PROMPT:
                 return ([[pos_cond, pos_output]], [[neg_cond, neg_output]], )
             else:
                 print("**************************************************************")
-                print("ARD Dual Prompt: the clip for this model is not set correctly")
+                print("ARD Dual Prompt: the clip for this model is not set correctly. or memory overload click Manager then on bottom left click Unload Models then try again.")
                 print("**************************************************************")
         except Exception as e:
             print("************************************************************************************")
-            print(f"ARD Dual Prompt: check clip settings. the clip for this model is not set correctly")
+            print(f"ARD Dual Prompt: check clip settings. or memory overload click Manager then on bottom left click Unload Models then try again.")
             print("************************************************************************************")
 
 

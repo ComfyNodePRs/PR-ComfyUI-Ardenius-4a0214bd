@@ -1,9 +1,20 @@
 {
-  "ARD Control Box": "control node that allows inputing model, vae, prompts, allows you to change things like steps, cfg, latent width, height, and outputs many parameters to be used in your workflow",
+  "ARD Control Box": "workflow control node that allows inputs model, vae, prompts, allows you to change things like steps, cfg, latent width, height, and outputs many parameters to be used in your workflow",
   "ARD Dual Prompt": "inputs positive and negative prompts as string text and outputs positive and negative conditioning prompts",
-  "ard_float": "float variable node",
-  "ard_integer": "integer variable node",
-  "ard_integer_to_float": "converts integer to float to be used in ARD math node",
-  "ard_math": "simple math operations multiply divide add subtract on two input float variables and outputs integer and float outputs",
-  "ard_text_box": "inputs text string and outputs text string"
+  "ARD Text Box": "inputs text string and outputs text string",
+  "ARD Float": "float variable node",
+  "ARD Integer": "integer variable node",
+  "ARD Integer To Float": "converts integer to float to be used in ARD math node",
+  "ARD Remainder": "adds to an integer Ix to make it divisible by Dx",
+  "ARD Math": "simple math operations multiply divide add subtract on two input float variables and outputs integer and float outputs",
+  "ARD 4crop Latent": "crops latent to 4",
+  "ARD 4img Combine": "combines 4 images or 2 images together",
+  "ARD 4latent Upscale": "upscale 4 latents together",
+  "ARD 4vae Decode": "decodes 4 latents together",
+  "ARD Empty Latent Image": "allows changing the shape dimension length",
+  "ARD Load Image": "outputs image information to be used in workflow like prompts, seed, width, height, steps, cfg.. and more",
+  "ARD Save Image": "Work Organizer: allows saving into different directories, saved image generation information into metadata to be loaded by ARD Load Image",
+  "ARD XY Scripts": "test a range of cfg, steps, denoise",
+  "ARD Position": "to easily place images into x y positions",
+  "ARD Resize": "allows for generating ai images with different aspect ratios"
 }
