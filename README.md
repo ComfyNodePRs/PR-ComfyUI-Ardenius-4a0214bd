@@ -6,7 +6,6 @@
 
 ## [Get 50% Off Cloud GPU Servers with code Ardenius](https://bit.ly/ardenius)
 
-## [Download link CPlus control box for ComfyUI](https://ko-fi.com/ardenius/shop)
 ## what's included in the custom nodes ?
 1. ARD Control Box takes a model, vae and prompts input and outputs:
 model, positive, negative, latent image, seed, width, height, cfg, steps, denoise, scaler, vae
@@ -20,6 +19,8 @@ model, positive, negative, latent image, seed, width, height, cfg, steps, denois
 9. ARD Dual Prompt: takes negative and positive string as input and outputs negative and positive conditioning to be used in ksamplers
 10. ARD xy scripts: allows you to test ComfyUI image generations using a range of steps, cfg, denoise 
 11. ARD empty latent image: lets you set the shape dimension of the latent image example 8 for SDXL 16 for Flux. 
+
+## [Download from my ko-fi page](https://ko-fi.com/ardenius/shop)
 
 ![](https://storage.ko-fi.com/cdn/useruploads/display/6f0dddf9-0697-4ef0-a772-2f189e0de6e2_comfyui_cplus_control_box.jpg)
 
