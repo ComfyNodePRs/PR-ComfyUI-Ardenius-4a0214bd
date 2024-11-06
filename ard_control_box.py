@@ -8,7 +8,7 @@
 #  ( author initials AMAA Nickname Ardenius contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
 #  ➡️ follow me at https://ko-fi.com/ardenius in the top right corner (follow)
 #  📸 Change the mood ! by Visiting my AI Image Gallery
-#  🏆 Support me by getting Premium Members only Perks (Premium Ardeniusai.com prompt engineer, text to image Models, ComfyUI custom nodes, and more to come)
+#  🏆 Support me by getting Premium Members only Perks (Premium SD Models, ComfyUI custom nodes, and more to come)
 #  below code is based upon ComfyUI code licensed under General Public License v3.0 https://www.gnu.org/licenses/gpl-3.0.txt by
 #  contributers found here https://github.com/comfyanonymous/ComfyUI
 #  thus all code here is released to the user as per the GPL V3.0 terms.
@@ -49,12 +49,12 @@ class ARD_CONTROL_BOX:
                     "latent_width": ("INT", {"default": 1024, "min": 64, "max": MAX_RESOLUTION, "step": 8}),
                     "latent_height": ("INT", {"default": 1024, "min": 64, "max": MAX_RESOLUTION, "step": 8}),
                     "latent_batch_size": ("INT", {"default": 1, "min": 1, "max": 4096}),
-                    "divisor": ("INT", {"default": 8, "min": 8, "max": 4096, "step": 8}),
+                    "divx": ("INT", {"default": 8, "min": 8, "max": 4096, "step": 8}),
                     },
                 }
 
-    RETURN_NAMES = ("model", "positive", "negative", "latent_out", "seed", "cfg", "steps", "denoise", "scaler", "vae", "width", "height", "latent_width", "latent_height",)
-    RETURN_TYPES = ("MODEL", "CONDITIONING", "CONDITIONING", "LATENT", "INT", "FLOAT", "INT", "FLOAT", "FLOAT", "VAE", "INT", "INT", "INT", "INT",)
+    RETURN_NAMES = ("model", "positive", "negative", "latent_out", "seed", "cfg", "steps", "denoise", "scaler", "vae", "width", "height", "latent_width", "latent_height", "divx",)
+    RETURN_TYPES = ("MODEL", "CONDITIONING", "CONDITIONING", "LATENT", "INT", "FLOAT", "INT", "FLOAT", "FLOAT", "VAE", "INT", "INT", "INT", "INT", "INT",)
 
     FUNCTION = "ard_control_box"
 
@@ -63,25 +63,25 @@ class ARD_CONTROL_BOX:
     CATEGORY = "Ardenius"
     DESCRIPTION = "ARD control box is designed to gather workflow variables into 1 node"
     # my_code_start
-    def ard_control_box(self, cfg, steps, denoise, scaler, seed, positive_prompt, negative_prompt, model, vae, width, height, latent_width, latent_height, latent_batch_size, divisor):
+    def ard_control_box(self, cfg, steps, denoise, scaler, seed, positive_prompt, negative_prompt, model, vae, width, height, latent_width, latent_height, latent_batch_size, divx):
 
-        remainder = width % divisor
+        remainder = width % divx
         width = width + remainder
 
-        remainder = height % divisor
+        remainder = height % divx
         height = height + remainder
 
-        remainder = latent_width % divisor
+        remainder = latent_width % divx
         latent_width = latent_width + remainder
 
-        remainder = latent_height % divisor
+        remainder = latent_height % divx
         latent_height = latent_height + remainder
 
-        latent_out = self.generate_latent(latent_width, latent_height, latent_batch_size, divisor=8)
+        latent_out = self.generate_latent(latent_width, latent_height, latent_batch_size, divx=8)
 
-        return model, positive_prompt, negative_prompt, latent_out, seed, cfg, steps, denoise, scaler, vae, width, height, latent_width, latent_height
+        return model, positive_prompt, negative_prompt, latent_out, seed, cfg, steps, denoise, scaler, vae, width, height, latent_width, latent_height, divx
 
-    def generate_latent(self, width, height, latent_batch_size=1, divisor=8):
-        latent = torch.zeros([latent_batch_size, 4, height // divisor, width // divisor], device=self.device)
-        return {"samples":latent}
-    # my_code_end
+    def generate_latent(self, width, height, latent_batch_size=1, divx=8):
+        latent = torch.zeros([latent_batch_size, 4, height // divx, width // divx], device=self.device)
+        return {"samples": latent}
+

@@ -8,7 +8,7 @@
 #  ( author initials AMAA Nickname Ardenius contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
 #  ➡️ follow me at https://ko-fi.com/ardenius in the top right corner (follow)
 #  📸 Change the mood ! by Visiting my AI Image Gallery
-#  🏆 Support me by getting Premium Members only Perks (Premium Ardeniusai.com prompt engineer, text to image Models, ComfyUI custom nodes, and more to come)
+#  🏆 Support me by getting Premium Members only Perks (Premium SD Models, ComfyUI custom nodes, and more to come)
 #  below code is based upon ComfyUI code licensed under General Public License v3.0 https://www.gnu.org/licenses/gpl-3.0.txt by
 #  contributers found here https://github.com/comfyanonymous/ComfyUI
 #  thus all code here is released to the user as per the GPL V3.0 terms.
@@ -70,7 +70,7 @@ class ARD_SAVE_IMAGE:
     DESCRIPTION = "ARD Save Image is a ComfyUI work organizer which allows you to save images in custom directories and meta tag them with custom information."
 
     def ard_save_images(self, images_in, filename_prefix, save_standard_metadata, files_dir, author_info_to_metadata, save_txtprompt, optimize_saved_image, filename_postfix, saving_images, file_extension, show_terminal_notifications, img_popup, save_workflow_to_metadata, create_date_folders, save_basic_metadata, civitai_metadata, prompt=None, extra_pnginfo=None):
-
+        basic_meta = None
         if saving_images.strip() == 'enabled':
             d_now = datetime.date.today()
             date_str = str(d_now)

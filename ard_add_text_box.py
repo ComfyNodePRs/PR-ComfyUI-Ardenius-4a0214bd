@@ -1,8 +1,8 @@
 """
-@author: initials AMA
-@title: Ardenius
+@author: initials AMAA
+@title: Ardenius AI
 @nickname: Ardenius
-@description: ARD integer: outputs an integer number
+@description: add text box takes input text adds it to contained text and outputs a string of text.
 """
 #  licensed under General Public License v3.0 all rights reserved © 2024
 #  ( author initials AMAA Nickname Ardenius contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
@@ -13,29 +13,29 @@
 #  contributers found here https://github.com/comfyanonymous/ComfyUI
 #  thus all code here is released to the user as per the GPL V3.0 terms.
 
-class ARD_INTEGER:
+class ARD_ADD_TEXT_BOX:
     # def __init__(self):
     #     pass
     @classmethod
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "Ix": ("INT", {"default": 1, "tooltip": "input an integer or float"}),
+                "input_text": ("STRING", {"tooltip": "connect previous text as input"}),
+                "add_text": ("STRING", {"multiline": True, "dynamicPrompts": True, "tooltip": "enter your text here to be added to previous input text"}),
             },
         }
 
-    RETURN_NAMES = ("integer",)
-    RETURN_TYPES = ("INT",)
-    FUNCTION = "ard_integer"
+    RETURN_NAMES = ("string_out",)
+    RETURN_TYPES = ("STRING",)
+    FUNCTION = "ard_add_text_box"
 
     CATEGORY = "Ardenius"
-    DESCRIPTION = "ARD integer: outputs an integer number"
+    DESCRIPTION = "add text box takes input text adds it to contained text and outputs a string of text."
 
-    def ard_integer(self, Ix):
-
-        if not isinstance(Ix, int):
-            output_integer = int(Ix)
+    def ard_add_text_box(self, input_text, add_text):
+        if isinstance(input_text, str) and isinstance(add_text, str):
+            text = input_text + ' ' + add_text
         else:
-            output_integer = Ix
-
-        return (output_integer,)
+            text = str(input_text) + str(add_text)
+            print(f"ARD ADD TEXT: ERROR: one of the inputs is not text or string:\n{text}")
+        return (text,)
