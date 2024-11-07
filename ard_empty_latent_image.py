@@ -18,7 +18,7 @@ import comfy
 
 MAX_RESOLUTION = 8192
 
-class ARD_EmptyLatentImage:
+class ARD_Empty_Latent_Image:
     def __init__(self):
         self.device = comfy.model_management.intermediate_device()
 
@@ -34,11 +34,11 @@ class ARD_EmptyLatentImage:
         }
     RETURN_TYPES = ("LATENT",)
     OUTPUT_TOOLTIPS = ("The empty latent image batch.",)
-    FUNCTION = "generate"
+    FUNCTION = "ard_empty_latent_image"
 
     CATEGORY = "Ardenius"
     DESCRIPTION = "ARD Empty latent image allows for entering divx for image dimension"
 
-    def generate(self, width, height, batch_size=1, divx=8):
+    def ard_empty_latent_image(self, width, height, batch_size=1, divx=8):
         latent = torch.zeros([batch_size, 4, height // divx, width // divx], device=self.device)
         return ({"samples": latent}, )
