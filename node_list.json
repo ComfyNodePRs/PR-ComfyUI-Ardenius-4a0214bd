@@ -16,5 +16,7 @@
   "ARD Save Image": "Work Organizer: allows saving into different directories, saved image generation information into metadata to be loaded by ARD Load Image",
   "ARD XY Scripts": "test a range of cfg, steps, denoise",
   "ARD Position": "to easily place images into x y positions",
-  "ARD Resize": "allows for generating ai images with different aspect ratios"
+  "ARD Resize": "allows for generating ai images with different aspect ratios",
+  "ARD Counter": "keeps increasing x_count by x_input until x_total is reached then resets to zero",
+  "ARD Basic Load Image": "adds width and height to the default load image node"
 }
