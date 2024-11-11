@@ -24,13 +24,13 @@ class ARD_RESIZE:
     def INPUT_TYPES(s):
         return {"required":
                     {
-                    "width": ("INT", {"default": 1024}),
-                    "height": ("INT", {"default": 1024}),
-                    "upscale_multiplier": ("FLOAT", {"default": 2.0}),
+                    "width": ("INT", {"default": 1024, "step": 8}),
+                    "height": ("INT", {"default": 1024, "step": 8}),
+                    "upscale_multiplier": ("FLOAT", {"default": 1.0}),
                     },
                 "optional": {
-                    "width_ratio": ("INT", {"default": 16}),
-                    "height_ratio": ("INT", {"default": 9}),
+                    "width_ratio": ("INT", {"default": 1}),
+                    "height_ratio": ("INT", {"default": 1}),
                     },
                 }
 
