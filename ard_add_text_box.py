@@ -5,7 +5,10 @@
 @description: add text box takes input text adds it to contained text and outputs a string of text.
 """
 #  licensed under General Public License v3.0 all rights reserved © 2024
-#  ( author initials AMAA Nickname Ardenius contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
+#  Owner initials: AMAA
+#  nickname: Ardenius
+#  email: ardenius7@gmail.com
+#  website: https://ko-fi.com/ardenius
 #  ➡️ follow me at https://ko-fi.com/ardenius in the top right corner (follow)
 #  📸 Change the mood ! by Visiting my AI Image Gallery
 #  🏆 Support me by getting Premium Members only Perks (Premium SD Models, ComfyUI custom nodes, and more to come)
@@ -22,7 +25,7 @@ class ARD_ADD_TEXT_BOX:
             "required": {
                 "input_text": ("STRING", {"tooltip": "connect previous text as input"}),
                 "add_text": ("STRING", {"multiline": True, "dynamicPrompts": True, "tooltip": "enter your text here to be added to previous input text"}),
-            },
+            }
         }
 
     RETURN_NAMES = ("string_out",)
@@ -36,6 +39,6 @@ class ARD_ADD_TEXT_BOX:
         if isinstance(input_text, str) and isinstance(add_text, str):
             text = input_text + ' ' + add_text
         else:
-            text = str(input_text) + str(add_text)
+            text = str(input_text)
             print(f"ARD ADD TEXT: ERROR: one of the inputs is not text or string:\n{text}")
         return (text,)

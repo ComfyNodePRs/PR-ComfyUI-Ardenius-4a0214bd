@@ -5,7 +5,10 @@
 @description: ARD control box is designed to gather workflow variables into 1 node.
 """
 #  licensed under General Public License v3.0 all rights reserved © 2024
-#  ( author initials AMAA Nickname Ardenius contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
+#  Owner initials: AMAA
+#  nickname: Ardenius
+#  email: ardenius7@gmail.com
+#  website: https://ko-fi.com/ardenius
 #  ➡️ follow me at https://ko-fi.com/ardenius in the top right corner (follow)
 #  📸 Change the mood ! by Visiting my AI Image Gallery
 #  🏆 Support me by getting Premium Members only Perks (Premium SD Models, ComfyUI custom nodes, and more to come)
@@ -62,7 +65,7 @@ class ARD_CONTROL_BOX:
 
     CATEGORY = "Ardenius"
     DESCRIPTION = "ARD control box is designed to gather workflow variables into 1 node"
-    # my_code_start
+
     def ard_control_box(self, cfg, steps, denoise, scaler, seed, positive_prompt, negative_prompt, model, vae, width, height, latent_width, latent_height, latent_batch_size, divx):
 
         remainder = width % divx

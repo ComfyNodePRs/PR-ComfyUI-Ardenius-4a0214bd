@@ -4,12 +4,17 @@
 @nickname: Ardenius
 @description: ARD Load Image outputs images generation information when saved through ARD Save Image or ComfyUI.
 """
-#  code marked between # my_code_start and # my_code_end is licensed all rights reserved © 2024
+#  licensed under General Public License v3.0 all rights reserved © 2024
 #  Owner initials: AMAA
 #  nickname: Ardenius
 #  email: ardenius7@gmail.com
 #  website: https://ko-fi.com/ardenius
-#  part or all of this software is licensed under GPL v3 https://www.gnu.org/licenses/gpl-3.0.txt by ComfyUI https://github.com/comfyanonymous/ComfyUI
+#  ➡️ follow me at https://ko-fi.com/ardenius in the top right corner (follow)
+#  📸 Change the mood ! by Visiting my AI Image Gallery
+#  🏆 Support me by getting Premium Members only Perks (Premium SD Models, ComfyUI custom nodes, and more to come)
+#  below code is based upon ComfyUI code licensed under General Public License v3.0 https://www.gnu.org/licenses/gpl-3.0.txt by
+#  contributers found here https://github.com/comfyanonymous/ComfyUI
+#  thus all code here is released to the user as per the GPL V3.0 terms.
 
 import os
 import folder_paths

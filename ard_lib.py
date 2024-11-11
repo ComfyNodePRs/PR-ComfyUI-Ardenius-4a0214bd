@@ -5,14 +5,25 @@ import inspect
 import importlib.util
 import hashlib
 
+#  licensed under General Public License v3.0 all rights reserved © 2024
+#  Owner initials: AMAA
+#  nickname: Ardenius
+#  email: ardenius7@gmail.com
+#  website: https://ko-fi.com/ardenius
+#  ➡️ follow me at https://ko-fi.com/ardenius in the top right corner (follow)
+#  📸 Change the mood ! by Visiting my AI Image Gallery
+#  🏆 Support me by getting Premium Members only Perks (Premium SD Models, ComfyUI custom nodes, and more to come)
+#  below code is based upon ComfyUI code licensed under General Public License v3.0 https://www.gnu.org/licenses/gpl-3.0.txt by
+#  contributers found here https://github.com/comfyanonymous/ComfyUI
+#  thus all code here is released to the user as per the GPL V3.0 terms.
 
 def save_dict_to_json(data_dict, json_file_path):
     try:
-        with open(json_file_path, 'w') as file:
-            json.dump(data_dict, file, indent=4)
+        with open(json_file_path, 'w') as jfile:
+            json.dump(data_dict, jfile, indent=4)
             # print(f"\nJSON file created and data saved successfully to: \n{json_file_path}")
-    except:
-        pass
+    except Exception as e:
+        print(f"could not save: {e}")
 
 
 def read_dict_from_json(json_file_path):

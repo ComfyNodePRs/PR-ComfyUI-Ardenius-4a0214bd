@@ -5,7 +5,10 @@
 @description: ARD Save Image is a ComfyUI work organizer which allows you to save images in custom directories and meta tag them with custom information.
 """
 #  licensed under General Public License v3.0 all rights reserved © 2024
-#  ( author initials AMAA Nickname Ardenius contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
+#  Owner initials: AMAA
+#  nickname: Ardenius
+#  email: ardenius7@gmail.com
+#  website: https://ko-fi.com/ardenius
 #  ➡️ follow me at https://ko-fi.com/ardenius in the top right corner (follow)
 #  📸 Change the mood ! by Visiting my AI Image Gallery
 #  🏆 Support me by getting Premium Members only Perks (Premium SD Models, ComfyUI custom nodes, and more to come)
@@ -23,7 +26,8 @@ import folder_paths
 from comfy.cli_args import args
 import ard_lib
 
-ard_data = "/ard_data"
+current_directory = os.path.dirname(os.path.abspath(__file__))
+ard_data = os.path.join(current_directory, "/ard_data")
 
 
 class ARD_SAVE_IMAGE:

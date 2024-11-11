@@ -5,7 +5,10 @@
 @description: ARD Empty latent image allows for entering divisor for image dimension
 """
 #  licensed under General Public License v3.0 all rights reserved © 2024
-#  ( author initials AMAA Nickname Ardenius contact information ardenius7@gmail.com attribution link https://ko-fi.com/ardenius )
+#  Owner initials: AMAA
+#  nickname: Ardenius
+#  email: ardenius7@gmail.com
+#  website: https://ko-fi.com/ardenius
 #  ➡️ follow me at https://ko-fi.com/ardenius in the top right corner (follow)
 #  📸 Change the mood ! by Visiting my AI Image Gallery
 #  🏆 Support me by getting Premium Members only Perks (Premium SD Models, ComfyUI custom nodes, and more to come)
@@ -29,7 +32,7 @@ class ARD_Empty_Latent_Image:
                 "width": ("INT", {"default": 1024, "min": 16, "max": MAX_RESOLUTION, "step": 8, "tooltip": "The width of the latent images in pixels."}),
                 "height": ("INT", {"default": 1024, "min": 16, "max": MAX_RESOLUTION, "step": 8, "tooltip": "The height of the latent images in pixels."}),
                 "batch_size": ("INT", {"default": 1, "min": 1, "max": 4096, "tooltip": "The number of latent images in the batch."}),
-                "divx": ("INT", {"default": 8, "min": 8, "max": 4096, "step": 8, "tooltip": "image dimensions divx."}),
+                "divx": ("INT", {"default": 8, "min": 8, "max": 4096, "step": 8, "tooltip": "image dimensions divx."})
             }
         }
     RETURN_TYPES = ("LATENT",)
