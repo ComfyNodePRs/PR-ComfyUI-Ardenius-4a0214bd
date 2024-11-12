@@ -85,7 +85,7 @@ class ARD_COUNTER:
                 x_total = 0.0
                 x_count_float = 0.0
                 x_count_int = 0
-                print(f'\n***\nard_counter reset to zero:\nx count float: {x_count_float}\nx input: {x_input}\nx total: {x_total}\n***\n')
+                # print(f'\n***\nard_counter reset to zero:\nx count float: {x_count_float}\nx input: {x_input}\nx total: {x_total}\n***\n')
 
             x_count_int = int(x_count_float)
             counter_dict["x_input"] = x_input
@@ -93,7 +93,7 @@ class ARD_COUNTER:
             counter_dict["x_count_int"] = x_count_int
             counter_dict["x_count_float"] = x_count_float
             ard_lib.save_dict_to_json(counter_dict, ard_counter_json)
-            print(f'\n***\nx count float: {x_count_float}\nx input: {x_input}\nx total: {x_total}\n***\n')
+            # print(f'\n***\nx count float: {x_count_float}\nx input: {x_input}\nx total: {x_total}\n***\n')
         else:
             x_count_float = x_count_float_old
             x_count_int = x_count_int_old
