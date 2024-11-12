@@ -85,7 +85,6 @@ class ARD_COUNTER:
                 x_total = 0.0
                 x_count_float = 0.0
                 x_count_int = 0
-
                 print(f'\n***\nard_counter reset to zero:\nx count float: {x_count_float}\nx input: {x_input}\nx total: {x_total}\n***\n')
 
             x_count_int = int(x_count_float)
