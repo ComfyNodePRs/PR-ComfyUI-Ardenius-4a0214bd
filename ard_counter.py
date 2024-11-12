@@ -80,7 +80,7 @@ class ARD_COUNTER:
         if x_input is not None and 0.0 < x_input < x_total:
             x_count_float = x_count_float_old + x_input
 
-            if x_count_float >= x_total:
+            if x_count_float > x_total:
                 x_input = 0.0
                 x_total = 0.0
                 x_count_float = 0.0
