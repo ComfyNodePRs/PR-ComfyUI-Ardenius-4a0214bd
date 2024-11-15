@@ -25,6 +25,7 @@ from PIL.PngImagePlugin import PngInfo
 import folder_paths
 from comfy.cli_args import args
 import ard_lib
+from custom_nodes.comfyui_controlnet_aux.src.custom_detectron2.config import instantiate
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
 ard_data = os.path.join(current_directory, "/ard_data")
@@ -179,7 +180,7 @@ class ARD_SAVE_IMAGE:
                         if show_terminal_notifications == 'enabled':
                             print(f"\nARD Save Image: workflow metadata added to image {counter} ")
 
-                    metadata.add_text("generation software", 'generated using Ardenius AI ARD Save Image found at https://ko-fi.com/ardenius')
+                    metadata.add_text("generation software", 'generated using Ardenius AI ARD ComfyUI Nodes found at https://ko-fi.com/ardenius email: ardenius7@gmail.com')
                     if show_terminal_notifications == 'enabled':
                         print("ARD Save Image: generation software info added to image")
                 else:
@@ -215,7 +216,7 @@ class ARD_SAVE_IMAGE:
                     txt_prompt_file = f"{filename_prefix}{counter}{filename_postfix}.txt"
                     txt_prompt_file_path = os.path.join(full_output_folder, txt_prompt_file)
                     with open(txt_prompt_file_path, 'w', buffering=1) as f_txt:
-                        prompt_txt = basic_meta['positive']
+                        prompt_txt = str(basic_meta['positive'])
                         f_txt.write(prompt_txt)
                 counter += 1
 
@@ -238,6 +239,8 @@ class ARD_SAVE_IMAGE:
     def prompt_get_values(s, prompt_in):
         prompt_keys1 = prompt_in.keys()
         prompt_dict = {}
+        positive = ""
+        negative = ""
         positive_not_found = True
         negative_not_found = True
         for keys in prompt_keys1:
@@ -246,35 +249,42 @@ class ARD_SAVE_IMAGE:
                     for sub_sub_keys in prompt_in[keys][sub_keys]:
                         # print(f'sub sub key: {sub_sub_keys}')
                         if sub_sub_keys == 'seed':
-                            seed = prompt_in[keys][sub_keys]['seed']
+                            seed = prompt_in[keys][sub_keys].get('seed', None)
                             seed = s.if_list(seed)
-                            prompt_dict.update({"seed": seed})
+                            if isinstance(seed, int) and seed is not None:
+                                prompt_dict.update({"seed": seed})
                         if sub_sub_keys == 'steps':
-                            steps = prompt_in[keys][sub_keys]['steps']
+                            steps = prompt_in[keys][sub_keys].get('steps', None)
                             steps = s.if_list(steps)
-                            prompt_dict.update({"steps": steps})
+                            if steps is not None and isinstance(steps, int):
+                                prompt_dict.update({"steps": steps})
                         if sub_sub_keys == 'cfg':
-                            cfg = prompt_in[keys][sub_keys]['cfg']
+                            cfg = prompt_in[keys][sub_keys].get('cfg', None)
                             cfg = s.if_list(cfg)
-                            prompt_dict.update({"cfg": cfg})
+                            if cfg is not None and isinstance(cfg, float):
+                                prompt_dict.update({"cfg": cfg})
                         if sub_sub_keys == 'sampler_name':
-                            sampler_name = prompt_in[keys][sub_keys]['sampler_name']
+                            sampler_name = prompt_in[keys][sub_keys].get('sampler_name', None)
                             sampler_name = s.if_list(sampler_name)
-                            prompt_dict.update({"sampler_name": sampler_name})
+                            if sampler_name is not None and isinstance(sampler_name, str):
+                                prompt_dict.update({"sampler_name": sampler_name})
                         if sub_sub_keys == 'scheduler':
-                            scheduler = prompt_in[keys][sub_keys]['scheduler']
+                            scheduler = prompt_in[keys][sub_keys].get('scheduler', None)
                             scheduler = s.if_list(scheduler)
-                            prompt_dict.update({"scheduler": scheduler})
+                            if scheduler is not None and isinstance(scheduler, str):
+                                prompt_dict.update({"scheduler": scheduler})
                         if sub_sub_keys == 'denoise':
-                            denoise = prompt_in[keys][sub_keys]['denoise']
+                            denoise = prompt_in[keys][sub_keys].get('denoise', None)
                             denoise = s.if_list(denoise)
-                            prompt_dict.update({"denoise": denoise})
+                            if denoise is not None and isinstance(denoise, float):
+                                prompt_dict.update({"denoise": denoise})
                         if sub_sub_keys == 'ckpt_name':
-                            ckpt_name = prompt_in[keys][sub_keys]['ckpt_name']
+                            ckpt_name = prompt_in[keys][sub_keys].get('ckpt_name', None)
                             ckpt_name = s.if_list(ckpt_name)
-                            prompt_dict.update({"ckpt_name": str(ckpt_name)})
-                        if sub_sub_keys == 'UnetLoaderGGUF':
-                            ckpt_name = prompt_in[keys][sub_keys]['widgets_values']
+                            if ckpt_name is not None and isinstance(ckpt_name, str):
+                                prompt_dict.update({"ckpt_name": str(ckpt_name)})
+                        if sub_sub_keys == 'MODEL':
+                            ckpt_name = prompt_in[keys][sub_keys].get("MODEL", "not_found")
                             ckpt_name = s.if_list(ckpt_name)
                             prompt_dict.update({"ckpt_name": str(ckpt_name)})
                         if sub_sub_keys == 'lora_name':
@@ -286,29 +296,53 @@ class ARD_SAVE_IMAGE:
                                 vae = prompt_in[keys][sub_keys]['vae']
                                 vae = s.if_list(vae)
                                 prompt_dict.update({"vae": vae})
-                        if sub_sub_keys == 'pos_text':
-                            pos_init = prompt_in[keys][sub_keys]['pos_text']
-                            if isinstance(pos_init, str):
-                                positive = prompt_in[keys][sub_keys]['pos_text']
-                                positive = s.if_list(positive)
-                                prompt_dict.update({"positive": positive})
-                                positive_not_found = False
-                        if (sub_sub_keys == 'text' and positive_not_found):
-                            positive = prompt_in[keys][sub_keys]['text']
-                            positive = s.if_list(positive)
-                            prompt_dict.update({"positive": positive})
-                            positive_not_found = False
-                        if sub_sub_keys == 'neg_text':
-                            neg_init = prompt_in[keys][sub_keys]['neg_text']
-                            if isinstance(neg_init, str):
-                                negative = prompt_in[keys][sub_keys]['neg_text']
-                                negative = s.if_list(negative)
-                                prompt_dict.update({"negative": negative})
-                                negative_not_found = False
-                        if sub_sub_keys == 'text' and negative_not_found:
-                            negative = prompt_in[keys][sub_keys]['text']
-                            negative = s.if_list(negative)
-                            prompt_dict.update({"negative": negative})
-                            negative_not_found = False
+                        if sub_sub_keys == 'pos_text' or sub_sub_keys == "string_out" or "text" or "add_text" or sub_sub_keys == "positive" or sub_sub_keys == "pos_prompt" or sub_sub_keys == "input_text":
+                            search_keys = ["pos_prompt", "pos_text", "positive", "text", "add_text", "input_text", "string_out"]
+                            found_in_text = False
+                            for search_item in search_keys:
+                                get_value = prompt_in[keys][sub_keys].get(search_item, None)
+                                if get_value is not None :
+                                    if isinstance(get_value, str) and get_value != "":
+                                        if get_value not in positive:
+                                            if positive != "" and search_item == "text":
+                                                pass
+                                            else:
+                                                positive += str(get_value) + " "
+                                                prompt_dict.update({"positive": positive})
+                                                positive_not_found = False
+                                            if search_item == "text":
+                                                found_in_text = True
+                                            # print(f'\npositive in search: {positive}')
+
+                            if positive == "" and positive_not_found and sub_sub_keys == "text":
+                                positive_init = prompt_in[keys][sub_keys].get("text", "")
+                                if isinstance(positive_init, str) and positive_init != "":
+                                    positive = positive_init + " "
+                                    prompt_dict.update({"positive": positive})
+                                    positive_not_found = False
+                                    # print(f'\npositive in text: {positive}')
+
+                        if sub_sub_keys == 'neg_text' or sub_sub_keys == 'text' or sub_sub_keys == "neg_prompt" or sub_sub_keys == "negative":
+                            search_keys = ["neg_prompt", "negative", "text", "neg_text"]
+                            for search_item in search_keys:
+                                get_value = prompt_in[keys][sub_keys].get(search_item, None)
+                                if get_value is not None:
+                                    if isinstance(get_value, str) and get_value != "" and get_value not in positive:
+                                        negative += str(get_value) + " "
+                                        if negative in positive:
+                                            positive = positive.replace(negative, "")
+                                            prompt_dict.update({"positive": positive})
+                                        prompt_dict.update({"negative": negative})
+                                        if search_item != "neg_text":
+                                            negative_not_found = False
+                                        # print(f'\nnegative in search: {negative}\n')
+
+                            if negative != "" and negative_not_found and sub_sub_keys == "text":
+                                negative_init = prompt_in[keys][sub_keys].get("text", "")
+                                if isinstance(negative_init, str) and negative_init != "":
+                                    negative += negative_init + " "
+                                    prompt_dict.update({"negative": negative})
+                                    negative_not_found = False
+                                    # print(f'\nnegative in text: {negative}\n')
         return prompt_dict
     # my_code_end

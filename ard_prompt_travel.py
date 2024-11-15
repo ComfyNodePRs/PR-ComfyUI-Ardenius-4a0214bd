@@ -2,7 +2,7 @@
 @author: initials AMAA
 @title: Ardenius AI
 @nickname: Ardenius
-@description: ARD Prompt Travel: add text box takes input text adds it to contained text and outputs a string of text. controlled through counter.
+@description: ARD Prompt Travel (experimental): add text box takes input text adds it to contained text and outputs a string of text. controlled through counter.
 """
 #  licensed under General Public License v3.0 all rights reserved © 2024
 #  Owner initials: AMAA
@@ -27,23 +27,25 @@ class ARD_PROMPT_TRAVEL:
                 "add_text": ("STRING", {"multiline": True, "dynamicPrompts": True, "default": "", "tooltip": "enter your text here to be added to previous input text"})
             },
             "optional": {
-                "xcount": ("FLOAT", {"default": 1.0, "step": 1.0}),
-                "from_xcount": ("FLOAT", {"default": 1.0, "step": 1.0}),
-                "to_xcount": ("FLOAT", {"default": 1.0, "step": 1.0})
+                "xcount": ("FLOAT", {"default": 0.0, "step": 0.1}),
+                "from_xcount": ("FLOAT", {"default": 0.0, "step": 0.1}),
+                "to_xcount": ("FLOAT", {"default": 0.0, "step": 0.1}),
+                "print_output": (["enabled", "disabled"], {"default": "enabled"})
             }
         }
 
-    RETURN_NAMES = ("string_out","xcount")
+    RETURN_NAMES = ("string_out","xcount",)
     RETURN_TYPES = ("STRING", "FLOAT",)
     FUNCTION = "ard_prompt_travel"
 
     CATEGORY = "Ardenius"
-    DESCRIPTION = "ARD Prompt Travel: add text box takes input text adds it to contained text and outputs a string of text. controlled through counter"
+    DESCRIPTION = "ARD Prompt Travel (experimental): add text box takes input text adds it to contained text and outputs a string of text. controlled through counter"
 
-    def ard_prompt_travel(self, input_text, add_text, xcount, from_xcount, to_xcount):
+    def ard_prompt_travel(self, input_text, add_text, xcount, from_xcount, to_xcount, print_output):
         if isinstance(input_text, str) and isinstance(add_text, str) and (from_xcount <= xcount <= to_xcount) and xcount > 0.0:
             text = input_text + ' ' + add_text
-            print(f"\n***\nARD Prompt Travel: {xcount}: executing prompt:\n{text}\n***\n")
+            if print_output == "enabled":
+                print(f"\n***\nARD Prompt Travel: frame: {xcount}: \nexecuting prompt:\n{text}\n***\n")
         else:
             text = str(input_text)
         return (text, xcount)

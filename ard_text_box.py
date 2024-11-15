@@ -23,7 +23,7 @@ class ARD_TEXT_BOX:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "text": ("STRING", {"multiline": True, "dynamicPrompts": True, "tooltip": "enter your text here"}),
+                "input_text": ("STRING", {"multiline": True, "dynamicPrompts": True, "tooltip": "enter your text here"}),
                 "ard_counter": ("FLOAT",{"default": 1.0})
             }
         }
@@ -35,6 +35,6 @@ class ARD_TEXT_BOX:
     CATEGORY = "Ardenius"
     DESCRIPTION = "text box takes input text outputs a string of text."
 
-    def ard_text_box(self, text, ard_counter):
+    def ard_text_box(self, input_text, ard_counter):
 
-        return (text, ard_counter)
+        return (input_text, ard_counter)

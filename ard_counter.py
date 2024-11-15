@@ -2,7 +2,7 @@
 @author: initials AMA
 @title: Ardenius
 @nickname: Ardenius
-@description: ARD Counter: keeps increasing x_count by x_input until x_total is reached then resets to zero
+@description: ARD Counter (experimental): keeps counting x_input until x_total is reached then it resets to zeros
 """
 
 #  licensed under General Public License v3.0 all rights reserved © 2024
@@ -29,8 +29,11 @@ class ARD_COUNTER:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "x_input": ("FLOAT", {"default": 1, "tooltip": "input a float that increments to be added to x_count"}),
-                "x_total": ("FLOAT", {"default": 1, "tooltip": "total a float when reached resets x_count to zeros"})
+                "x_input": ("FLOAT", {"default": 0, "tooltip": "input a float that increments to be added to x_count"}),
+                "x_total": ("FLOAT", {"default": 0, "tooltip": "total a float when reached resets x_count to zeros"})
+            },
+            "optional": {
+                "print_output": (["enabled", "disabled"], {"default": "enabled"})
             }
         }
 
@@ -39,9 +42,9 @@ class ARD_COUNTER:
     FUNCTION = "ard_counter"
 
     CATEGORY = "Ardenius"
-    DESCRIPTION = "ARD Counter: keeps counting integer number increasing by Cx and zeros if total is reached"
+    DESCRIPTION = "ARD Counter (experimental): keeps counting x_input until x_total is reached then it resets to zeros"
 
-    def ard_counter(self, x_input, x_total):
+    def ard_counter(self, x_input, x_total, print_output):
 
         x_count_int = 0
         x_count_float = 0.0
@@ -77,25 +80,22 @@ class ARD_COUNTER:
             x_count_float_old = counter_dict.get("x_count_float", 0.0)
             x_count_int_old = counter_dict.get("x_count_int_old", 0)
 
-        if x_input is not None and 0.0 < x_input < x_total:
+        if x_input > 0 and x_count_float < x_total:
+
             x_count_float = x_count_float_old + x_input
-
-            if x_count_float > x_total:
-                x_input = 0.0
-                x_total = 0.0
-                x_count_float = 0.0
-                x_count_int = 0
-                # print(f'\n***\nard_counter reset to zero:\nx count float: {x_count_float}\nx input: {x_input}\nx total: {x_total}\n***\n')
-
             x_count_int = int(x_count_float)
+
             counter_dict["x_input"] = x_input
             counter_dict["x_total"] = x_total
             counter_dict["x_count_int"] = x_count_int
             counter_dict["x_count_float"] = x_count_float
             ard_lib.save_dict_to_json(counter_dict, ard_counter_json)
-            # print(f'\n***\nx count float: {x_count_float}\nx input: {x_input}\nx total: {x_total}\n***\n')
+            if print_output == "enabled":
+                print(f'\n***\nx count float: {x_count_float}\nx input: {x_input}\nx total: {x_total}\n***\n')
         else:
-            x_count_float = x_count_float_old
-            x_count_int = x_count_int_old
+            if print_output == "enabled":
+                print(f'\n***\nard_counter resetting to zero:\nlast x count float: {x_count_float}\nx total: {x_total}\n***\n')
+            if os.path.exists(ard_counter_json):
+                os.remove(ard_counter_json)
 
         return (x_count_int, x_count_float)
