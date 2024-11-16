@@ -312,7 +312,7 @@ class ARD_SAVE_IMAGE:
                                                 positive_not_found = False
                                             if search_item == "text":
                                                 found_in_text = True
-                                            print(f'\npositive in search: {positive}')
+                                            # print(f'\npositive in search: {positive}')
 
                             if positive == "" and positive_not_found and sub_sub_keys == "text":
                                 positive_init = prompt_in[keys][sub_keys].get("text", "")
@@ -320,7 +320,7 @@ class ARD_SAVE_IMAGE:
                                     positive = positive_init + " "
                                     prompt_dict.update({"positive": positive})
                                     positive_not_found = False
-                                    print(f'\npositive in text: {positive}')
+                                    # print(f'\npositive in text: {positive}')
 
                         if sub_sub_keys == 'neg_text' or sub_sub_keys == 'text' or sub_sub_keys == "negative" or "negative" in sub_sub_keys or "neg" in sub_sub_keys or sub_sub_keys == "add_text" or sub_sub_keys == "input_text":
                             search_keys = ["neg_prompt", "negative", "text", "neg_text", "add_text", "input_text"]
@@ -336,7 +336,7 @@ class ARD_SAVE_IMAGE:
                                         prompt_dict.update({"negative": negative})
                                         if search_item != "neg_text":
                                             negative_not_found = False
-                                        print(f'\nnegative in search: {negative}\n')
+                                        # print(f'\nnegative in search: {negative}\n')
 
                             if negative == "" and not positive_not_found and negative_not_found and sub_sub_keys == "text":
                                 negative_init = prompt_in[keys][sub_keys].get("text", "")
@@ -344,6 +344,6 @@ class ARD_SAVE_IMAGE:
                                     negative += negative_init + " "
                                     prompt_dict.update({"negative": negative})
                                     negative_not_found = False
-                                    print(f'\nnegative in text: {negative}\n')
+                                    # print(f'\nnegative in text: {negative}\n')
         return prompt_dict
     # my_code_end
