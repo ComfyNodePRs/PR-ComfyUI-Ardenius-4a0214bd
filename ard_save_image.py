@@ -216,7 +216,7 @@ class ARD_SAVE_IMAGE:
                     txt_prompt_file = f"{filename_prefix}{counter}{filename_postfix}.txt"
                     txt_prompt_file_path = os.path.join(full_output_folder, txt_prompt_file)
                     with open(txt_prompt_file_path, 'w', buffering=1) as f_txt:
-                        prompt_txt = str(basic_meta['positive'])
+                        prompt_txt = str(basic_meta.get("positive", ""))
                         f_txt.write(prompt_txt)
                 counter += 1
 
@@ -296,13 +296,13 @@ class ARD_SAVE_IMAGE:
                                 vae = prompt_in[keys][sub_keys]['vae']
                                 vae = s.if_list(vae)
                                 prompt_dict.update({"vae": vae})
-                        if sub_sub_keys == 'pos_text' or sub_sub_keys == "string_out" or "text" or "add_text" or sub_sub_keys == "positive" or sub_sub_keys == "pos_prompt" or sub_sub_keys == "input_text":
-                            search_keys = ["pos_prompt", "pos_text", "positive", "text", "add_text", "input_text", "string_out"]
+                        if sub_sub_keys == 'pos_text' or sub_sub_keys == "text" or sub_sub_keys == "positive" or "positive" in sub_sub_keys or "pos" in sub_sub_keys or sub_sub_keys == "add_text" or sub_sub_keys == "input_text":
+                            search_keys = ["pos_text", "positive", "text", "add_text", "input_text"]
                             found_in_text = False
                             for search_item in search_keys:
                                 get_value = prompt_in[keys][sub_keys].get(search_item, None)
                                 if get_value is not None :
-                                    if isinstance(get_value, str) and get_value != "":
+                                    if isinstance(get_value, str) and get_value != "" and "negative" not in get_value and "neg" not in get_value and "ugly" not in get_value and "blur" not in get_value:
                                         if get_value not in positive:
                                             if positive != "" and search_item == "text":
                                                 pass
@@ -312,7 +312,7 @@ class ARD_SAVE_IMAGE:
                                                 positive_not_found = False
                                             if search_item == "text":
                                                 found_in_text = True
-                                            # print(f'\npositive in search: {positive}')
+                                            print(f'\npositive in search: {positive}')
 
                             if positive == "" and positive_not_found and sub_sub_keys == "text":
                                 positive_init = prompt_in[keys][sub_keys].get("text", "")
@@ -320,14 +320,15 @@ class ARD_SAVE_IMAGE:
                                     positive = positive_init + " "
                                     prompt_dict.update({"positive": positive})
                                     positive_not_found = False
-                                    # print(f'\npositive in text: {positive}')
+                                    print(f'\npositive in text: {positive}')
 
-                        if sub_sub_keys == 'neg_text' or sub_sub_keys == 'text' or sub_sub_keys == "neg_prompt" or sub_sub_keys == "negative":
-                            search_keys = ["neg_prompt", "negative", "text", "neg_text"]
+                        if sub_sub_keys == 'neg_text' or sub_sub_keys == 'text' or sub_sub_keys == "negative" or "negative" in sub_sub_keys or "neg" in sub_sub_keys or sub_sub_keys == "add_text" or sub_sub_keys == "input_text":
+                            search_keys = ["neg_prompt", "negative", "text", "neg_text", "add_text", "input_text"]
+
                             for search_item in search_keys:
                                 get_value = prompt_in[keys][sub_keys].get(search_item, None)
                                 if get_value is not None:
-                                    if isinstance(get_value, str) and get_value != "" and get_value not in positive:
+                                    if isinstance(get_value, str) and get_value != "" and get_value not in positive and "positive" not in get_value and "pos" not in get_value or "negative" in get_value or "neg" in get_value:
                                         negative += str(get_value) + " "
                                         if negative in positive:
                                             positive = positive.replace(negative, "")
@@ -335,14 +336,14 @@ class ARD_SAVE_IMAGE:
                                         prompt_dict.update({"negative": negative})
                                         if search_item != "neg_text":
                                             negative_not_found = False
-                                        # print(f'\nnegative in search: {negative}\n')
+                                        print(f'\nnegative in search: {negative}\n')
 
-                            if negative != "" and negative_not_found and sub_sub_keys == "text":
+                            if negative == "" and not positive_not_found and negative_not_found and sub_sub_keys == "text":
                                 negative_init = prompt_in[keys][sub_keys].get("text", "")
                                 if isinstance(negative_init, str) and negative_init != "":
                                     negative += negative_init + " "
                                     prompt_dict.update({"negative": negative})
                                     negative_not_found = False
-                                    # print(f'\nnegative in text: {negative}\n')
+                                    print(f'\nnegative in text: {negative}\n')
         return prompt_dict
     # my_code_end
