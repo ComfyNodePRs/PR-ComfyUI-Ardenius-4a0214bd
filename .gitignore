@@ -1,7 +1,6 @@
 .idea
 .git
 
-/ard_data/ard_counter.json
 /ard_data/temp_data.json
 /ard_data/xy_data.json
 /ard_video_combine.py
