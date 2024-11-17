@@ -107,6 +107,17 @@ class ARD_SAVE_IMAGE:
 
             counter = 1
 
+            file = f"{filename_prefix}{counter}{filename_postfix}.{file_extension}"
+            image_path = os.path.join(full_output_folder, file)
+
+            if os.path.exists(image_path):
+                while os.path.exists(image_path):
+                    counter += 1
+                    file = f"{filename_prefix}{counter}{filename_postfix}.{file_extension}"
+                    image_path = os.path.join(full_output_folder, file)
+            else:
+                pass
+
             read_file = os.path.join(ard_data, 'temp_data.json')
             if os.path.exists(read_file):
                 loaded_img_info = ard_lib.read_dict_from_json(read_file)
@@ -187,15 +198,6 @@ class ARD_SAVE_IMAGE:
                     if show_terminal_notifications == 'enabled':
                         print(f'ARD Save Image: no meta data was saved in the image. disabled from main ComfyUI settings')
 
-                file = f"{filename_prefix}{counter}{filename_postfix}.{file_extension}"
-                image_path = os.path.join(full_output_folder, file)
-
-                if os.path.exists(image_path):
-                    while os.path.exists(image_path):
-                        counter += 1
-                        file = f"{filename_prefix}{counter}{filename_postfix}.{file_extension}"
-                        image_path = os.path.join(full_output_folder, file)
-
                 if optimize_saved_image.strip() == 'enabled':
                     optimize = True
                 else:
@@ -218,7 +220,7 @@ class ARD_SAVE_IMAGE:
                     with open(txt_prompt_file_path, 'w', buffering=1) as f_txt:
                         prompt_txt = str(basic_meta.get("positive", ""))
                         f_txt.write(prompt_txt)
-                counter += 1
+
 
         if basic_meta is not None and save_basic_metadata == "enabled" and show_terminal_notifications == "enabled":
             print(f"\n*********************\nARD Save Image: saved image info")
