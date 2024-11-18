@@ -35,8 +35,8 @@ class ARD_BASIC_LOAD_IMAGE:
                 }
 
     CATEGORY = "image"
-    RETURN_NAMES = ("image", "mask", "width", "height")
-    RETURN_TYPES = ("IMAGE", "MASK", "INT", "INT")
+    RETURN_NAMES = ("image", "mask", "width", "height", "image_path")
+    RETURN_TYPES = ("IMAGE", "MASK", "INT", "INT", "STRING")
 
     FUNCTION = "ard_basic_load_image"
     DESCRIPTION = "ARD Basic Load Image: adds width and height to the output of the default load image"
@@ -87,4 +87,4 @@ class ARD_BASIC_LOAD_IMAGE:
             output_image = output_images[0]
             output_mask = output_masks[0]
 
-        return (output_image, output_mask, width, height)
+        return (output_image, output_mask, width, height, image_path)

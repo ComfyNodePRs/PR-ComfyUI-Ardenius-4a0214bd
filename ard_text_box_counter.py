@@ -2,7 +2,7 @@
 @author: initials AMAA
 @title: Ardenius AI
 @nickname: Ardenius
-@description: ARD Text Box: text box takes input text outputs a string of text.
+@description: ARD Text Box Counter to be used with ARD Counter - text box takes input text outputs a string of text..
 """
 #  licensed under General Public License v3.0 all rights reserved © 2024
 #  Owner initials: AMAA
@@ -16,7 +16,7 @@
 #  contributers found here https://github.com/comfyanonymous/ComfyUI
 #  thus all code here is released to the user as per the GPL V3.0 terms.
 
-class ARD_TEXT_BOX:
+class ARD_TEXT_BOX_COUNTER:
     # def __init__(self):
     #     pass
     @classmethod
@@ -24,16 +24,17 @@ class ARD_TEXT_BOX:
         return {
             "required": {
                 "input_text": ("STRING", {"multiline": True, "dynamicPrompts": True, "tooltip": "enter your text here"}),
+                "ard_counter": ("FLOAT",{"default": 1.0})
             }
         }
 
-    RETURN_NAMES = ("string_out",)
-    RETURN_TYPES = ("STRING",)
-    FUNCTION = "ard_text_box"
+    RETURN_NAMES = ("string_out", "ard_counter")
+    RETURN_TYPES = ("STRING", "FLOAT")
+    FUNCTION = "ard_text_box_counter"
 
     CATEGORY = "Ardenius"
-    DESCRIPTION = "ARD Text Box: text box takes input text outputs a string of text."
+    DESCRIPTION = "ARD Text Box Counter to be used with ARD Counter - text box takes input text outputs a string of text."
 
-    def ard_text_box(self, input_text):
+    def ard_text_box_counter(self, input_text, ard_counter):
 
-        return (input_text,)
+        return (input_text, ard_counter)
