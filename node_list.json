@@ -2,6 +2,7 @@
   "ARD Control Box": "workflow control node that allows inputs model, vae, prompts, allows you to change things like steps, cfg, latent width, height, and outputs many parameters to be used in your workflow",
   "ARD Dual Prompt": "inputs positive and negative prompts as string text and outputs positive and negative conditioning prompts",
   "ARD Text Box": "inputs text string and outputs text string",
+  "ARD Text Box Counter": "to be used with ARD Counter inputs text string and outputs text string",
   "ARD Float": "float variable node",
   "ARD Integer": "integer variable node",
   "ARD Integer To Float": "converts integer to float to be used in ARD math node",
