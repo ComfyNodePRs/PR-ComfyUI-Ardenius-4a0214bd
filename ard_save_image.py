@@ -41,8 +41,8 @@ class ARD_SAVE_IMAGE:
     #   my_code_start
     @classmethod
     def INPUT_TYPES(s):
-        return {"required":
-                    {"images_in": ("IMAGE", ),
+        return {"required": {
+                        "images_in": ("IMAGE", )
                     },
                 "optional": {
                     "saving_images": (["enabled", "disabled"], {"default": "enabled"}),
@@ -61,7 +61,7 @@ class ARD_SAVE_IMAGE:
                     "save_workflow_to_metadata": (["enabled", "disabled"], {"default": "disabled"}),
                     "show_terminal_notifications": (["enabled", "disabled"], {"default": "disabled"}),
                     },
-                "hidden": {"prompt": "PROMPT", "extra_pnginfo": "EXTRA_PNGINFO"},
+                "hidden": {"prompt": "PROMPT", "extra_pnginfo": "EXTRA_PNGINFO"}
                 }
 
     RETURN_NAMES = ("images_out",)
@@ -76,7 +76,9 @@ class ARD_SAVE_IMAGE:
 
     def ard_save_images(self, images_in, filename_prefix, save_standard_metadata, files_dir, author_info_to_metadata, save_txtprompt, optimize_saved_image, filename_postfix, saving_images, file_extension, show_terminal_notifications, img_popup, save_workflow_to_metadata, create_date_folders, save_basic_metadata, civitai_metadata, prompt=None, extra_pnginfo=None):
         basic_meta = None
+        no_prompts = False
         if saving_images.strip() == 'enabled':
+
             d_now = datetime.date.today()
             date_str = str(d_now)
 
@@ -124,7 +126,7 @@ class ARD_SAVE_IMAGE:
             else:
                 loaded_img_info = None
 
-            if loaded_img_info is not None or loaded_img_info != {}:
+            if loaded_img_info is not None or loaded_img_info != {} and prompt is not None:
                 try:
                     initial_meta = self.prompt_get_values(prompt)
                     initial_keys = initial_meta.keys()
@@ -145,7 +147,11 @@ class ARD_SAVE_IMAGE:
                     else:
                         pass
             else:
-                basic_meta = self.prompt_get_values(prompt)
+                if prompt is not None:
+                    basic_meta = self.prompt_get_values(prompt)
+                else:
+                    print("ARD Save Image: no prompts were found. this is not a ComfyUI image")
+                    no_prompts = True
 
             for image in images_in:
                 i = 255. * image.cpu().numpy()
@@ -153,7 +159,7 @@ class ARD_SAVE_IMAGE:
                 metadata = None
                 width = img.width
                 height = img.height
-                if not args.disable_metadata:
+                if not args.disable_metadata and not no_prompts:
                     metadata = PngInfo()
                     if author_info_to_metadata.strip() != '':
                         metadata.add_text("owner_info", json.dumps(author_info_to_metadata.strip()))
@@ -214,13 +220,12 @@ class ARD_SAVE_IMAGE:
                 if img_popup.strip() == 'enabled':
                     img.show(image_path)
 
-                if save_txtprompt.strip() == 'enabled':
+                if save_txtprompt.strip() == 'enabled' and not no_prompts:
                     txt_prompt_file = f"{filename_prefix}{counter}{filename_postfix}.txt"
                     txt_prompt_file_path = os.path.join(full_output_folder, txt_prompt_file)
                     with open(txt_prompt_file_path, 'w', buffering=1) as f_txt:
                         prompt_txt = str(basic_meta.get("positive", ""))
                         f_txt.write(prompt_txt)
-
 
         if basic_meta is not None and save_basic_metadata == "enabled" and show_terminal_notifications == "enabled":
             print(f"\n*********************\nARD Save Image: saved image info")
