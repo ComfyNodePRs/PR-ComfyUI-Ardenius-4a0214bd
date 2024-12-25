@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-ardenius"
+description = "ARD ComfyUI Ardenius include ARD Control Box, ARD Math nodes and other helper nodes to be added in the future. for more info https://ko-fi.com/ardenius."
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["civitai", "moviepy"]
+
+[project.urls]
+Repository = "https://github.com/ArdeniusAI/ComfyUI-Ardenius"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-Ardenius"
+Icon = ""
